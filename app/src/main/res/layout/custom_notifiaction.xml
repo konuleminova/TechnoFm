@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="64dp"
+    android:padding="10dp" >
+    <ImageView
+        android:id="@+id/play_imageView"
+        android:layout_width="40dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+     />
+
+
+    <TextView
+
+        android:textSize="13dp"
+        android:textColor="#FF337A  "
+        android:text=" Jazz Oidar FM"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/play_imageView"
+        />
+    <TextView
+
+        android:textSize="13dp"
+        android:textColor="#7A1932 "
+        android:text="Live Streaming Radio"
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/play_imageView"
+        android:layout_below="@id/title"
+        />
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fm_textView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="14dp"
+        android:background="@drawable/info_grandient"
+        android:gravity="center"
+        android:text="FM"
+        android:textColor="@color/textcolor" />
+
+    <TextView
+        android:id="@+id/info_TextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/info_grandient"
+        android:gravity="center"
+        android:text="INFO"
+        android:textColor="#321D62"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>
+

@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    tools:context="app.android.jazzfm.oidarfm.fragment.FmTab">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="17dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="320x90"
+                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.  "
+                android:textColor="#B91A30"
+                android:textStyle="bold"
+              />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/text_border"
+                android:textColor="#B91A30"
+                android:id="@+id/email_layout"
+                android:hint="Your email address"
+                />
+            <EditText
+                android:gravity="top|left"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/text_border"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="17dp"
+                android:id="@+id/message_layout"
+                android:hint="Your message"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/send"
+                android:text="SEND"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:id="@+id/btnSend"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

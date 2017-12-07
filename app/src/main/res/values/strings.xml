@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Jazz OIDAR.FM</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="thank" > Thank You ! <br> Your message has been sent successfully.</br> </string>
+    <string name="get" > Get method not allowed </string>
+    <string name="db" > Database error. </string>
+    <string name="fill" >  Please fill all inputs.</string>
+    <string name="keyeror" >This keyword not found. </string>
+    <string name="key" >Keyword is not active. </string>
+
+    <string name="jazfm">Jazz Oidar FM</string>
+    <string name="fm" > FM </string>
+    <string name="info" > INFO </string>
+    <string name="internet" > Check your internet connection </string>
+    <string name="addcontext" > ca-app-pub-8218969334616339~9665795511 </string>
+    <string name="adddevice" >33BE2250B43518CCDA7DE426D04EE232 </string>
+    <string name="api" >http://oidarfm.rufatet.com/app/sendmsg/ </string>
+    <string name="stream" >http://stream.radio.co/s3a6b8d4eb/listen </string>
+</resources>
