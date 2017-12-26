@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jazz OIDAR.FM</string>
+    <string name="app_name">Techno OIDAR.FM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="thank" > Thank You ! <br> Your message has been sent successfully.</br> </string>
@@ -9,7 +9,7 @@
     <string name="keyeror" >This keyword not found. </string>
     <string name="key" >Keyword is not active. </string>
 
-    <string name="jazfm">Jazz Oidar FM</string>
+    <string name="technofm">Techno Oidar FM</string>
     <string name="fm" > FM </string>
     <string name="info" > INFO </string>
     <string name="internet" > Check your internet connection </string>

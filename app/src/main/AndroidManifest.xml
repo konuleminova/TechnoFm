@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.android.jazzfm.oidarfm"
+    package="app.android.technofm.oidarfm"
     android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="app.android.jazzfm.oidarfm.activity.MainActivity"
+            android:name="app.android.technofm.oidarfm.activity.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,11 @@
         </activity>
         <service
 
-            android:name="app.android.jazzfm.oidarfm.service.BackgroundSoundService"
+            android:name="app.android.technofm.oidarfm.service.BackgroundSoundService"
             android:enabled="true"
             android:stopWithTask="true" />
         <receiver
-            android:name="app.android.jazzfm.oidarfm.service.StopServiceReceiver"
+            android:name="app.android.technofm.oidarfm.service.StopServiceReceiver"
             android:enabled="true"
             android:exported="true"
             android:process=":remote">

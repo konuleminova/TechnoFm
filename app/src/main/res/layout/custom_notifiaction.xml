@@ -16,8 +16,8 @@
     <TextView
 
         android:textSize="13dp"
-        android:textColor="#FF337A  "
-        android:text=" Jazz Oidar FM"
+        android:textColor="#3530CF"
+        android:text=" Techno Oidar FM"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
     <TextView
 
         android:textSize="13dp"
-        android:textColor="#7A1932 "
+        android:textColor="#08064E"
         android:text="Live Streaming Radio"
         android:id="@+id/text"
         android:layout_width="wrap_content"

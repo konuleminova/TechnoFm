@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "app.android.jazzfm.oidarfm"
+        applicationId "app.android.technofm.oidarfm"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
