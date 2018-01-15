@@ -26,7 +26,7 @@
 
             android:name="app.android.technofm.oidarfm.service.BackgroundSoundService"
             android:enabled="true"
-            android:stopWithTask="true" />
+            android:stopWithTask="false" />
         <receiver
             android:name="app.android.technofm.oidarfm.service.StopServiceReceiver"
             android:enabled="true"

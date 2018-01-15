@@ -3,18 +3,28 @@ package app.android.technofm.oidarfm.activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.net.HttpURLConnection;
+import java.util.concurrent.TimeUnit;
+
+import app.android.technofm.oidarfm.fragment.FmTab;
 import app.android.technofm.oidarfm.service.BackgroundSoundService;
 import app.android.technofm.oidarfm.adapter.PageAdapter;
 import app.android.technofm.oidarfm.R;
@@ -28,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     TabLayout.Tab infoTab, fmTab;
+    static AsyncTask task;
+
 
     @Override
     protected void onPause() {
@@ -35,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         notificationMethod();
 
     }
+
 
     @Override
     protected void onPostResume() {
@@ -54,19 +67,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTabs();
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                initViews();
-                if (viewPager.getCurrentItem() == 1) {
-                    fmTab.setText(getResources().getString(R.string.info));
-                    infoTab.setText(getResources().getString(R.string.fm));
-                    setInfoBar();
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initViews();
+                        if (viewPager.getCurrentItem() == 1) {
+                            fmTab.setText(getResources().getString(R.string.info));
+                            infoTab.setText(getResources().getString(R.string.fm));
+                            setInfoBar();
 
-                } else if (viewPager.getCurrentItem() == 0) {
-                    setFmBar();
-                }
+                        } else if (viewPager.getCurrentItem() == 0) {
+                            setFmBar();
+                        }
+                        hideKeyboard();
+                    }
+                });
             }
 
             @Override
@@ -78,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (viewPager.getCurrentItem() == 0) {
                     setFmBar();
                 }
+
             }
 
             @Override
@@ -178,6 +199,12 @@ public class MainActivity extends AppCompatActivity {
         fmBar.setVisibility(View.INVISIBLE);
         infoBar.setVisibility(View.VISIBLE);
     }
+    private void hideKeyboard(){
+        final InputMethodManager imm = (InputMethodManager)getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
+    }
+
 }
 
 

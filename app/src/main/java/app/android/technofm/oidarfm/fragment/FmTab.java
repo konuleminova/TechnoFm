@@ -6,7 +6,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +23,18 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import app.android.technofm.oidarfm.R;
+import app.android.technofm.oidarfm.activity.MainActivity;
 import app.android.technofm.oidarfm.service.BackgroundSoundService;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Asus on 10/24/2017.
@@ -33,7 +47,9 @@ public class FmTab extends Fragment {
     Intent intent;
     TextView plsWaitTextView;
     ImageView plswaitImageView;
-    AsyncTask task;
+    static AsyncTask task;
+    int delay = 500;
+    Thread timer;
 
     @Override
     public void startActivity(Intent intent) {
@@ -41,74 +57,43 @@ public class FmTab extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fm, container, false);
+        final View view = inflater.inflate(R.layout.fragment_fm, container, false);
         intent = new Intent(getActivity(), BackgroundSoundService.class);
-        initViews(view);
-        if (BackgroundSoundService.player != null) {
-            if (BackgroundSoundService.player.isPlaying()) {
-                pauseVisible();
-            } else {
-                playVisible();
+
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                Log.d("UI thread", "I am the UI thread");
+
+                initViews(view);
+
+                if (BackgroundSoundService.player != null) {
+                    if (BackgroundSoundService.player.isPlaying()) {
+                        pauseVisible();
+                    } else {
+                        playVisible();
+                    }
+                }
             }
-        }
+        });
+
+
+
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNetworkAvailable(getActivity())) {
-                    task = new AsyncTask() {
-                        @Override
-                        protected Object doInBackground(Object[] objects) {
 
-                            if (isNetworkAvailable(getActivity()) == true) {
-
-                                if (BackgroundSoundService.player != null) {
-
-                                    BackgroundSoundService.player.start();
+                backgroundTimer();
 
 
-                                } else {
-                                    getActivity().startService(new Intent(getActivity(), BackgroundSoundService.class));
-                                }
-
-
-                            } else {
-                                Toast.makeText(getActivity(), getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
-                            }
-
-                            return objects;
-                        }
-
-                        @Override
-                        protected void onPreExecute() {
-                            playButton.setVisibility(View.INVISIBLE);
-                            visiblePlswaitMethod();
-                            super.onPreExecute();
-                        }
-
-                        @Override
-                        protected void onPostExecute(Object o) {
-                            if (BackgroundSoundService.player != null) {
-                                if (BackgroundSoundService.player.isPlaying()) {
-                                    pauseVisible();
-                                } else {
-                                    playVisible();
-                                }
-                            }
-                            pauseVisible();
-                            gonePlswaitMethod();
-                            super.onPostExecute(o);
-                        }
-                    };
-                    task.execute();
-
-
-                } else {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
-                }
             }
-
 
         });
 
@@ -176,5 +161,88 @@ public class FmTab extends Fragment {
         plsWaitTextView.setVisibility(View.VISIBLE);
         plswaitImageView.setVisibility(View.VISIBLE);
     }
-}
+    public void backgroundTimer() {
 
+        timer = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Timer timer = new Timer();
+                        TimerTask hourlyTask = new TimerTask() {
+                            @Override
+                            public void run() {
+                              getActivity().runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Log.d("UI thread", "I am the UI thread");
+                                        doAscyn();
+                                        task.execute();
+                                    }
+                                });
+
+
+                            }
+                        };
+                        timer.schedule(hourlyTask, delay);
+
+                    }
+                });
+
+            }
+        });
+        timer.start();
+
+    }
+
+    public void doAscyn() {
+        task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+
+
+                if (isNetworkAvailable(getActivity()) == true) {
+
+                    if (BackgroundSoundService.player != null) {
+
+                        BackgroundSoundService.player.start();
+
+
+                    } else {
+                        getActivity().startService(new Intent(getActivity(), BackgroundSoundService.class));
+                    }
+
+
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
+                }
+
+                return objects;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                playButton.setVisibility(View.INVISIBLE);
+                visiblePlswaitMethod();
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if (BackgroundSoundService.player != null) {
+                    if (BackgroundSoundService.player.isPlaying()) {
+                        pauseVisible();
+                    } else {
+                        playVisible();
+                    }
+                }
+                pauseVisible();
+                gonePlswaitMethod();
+                super.onPostExecute(o);
+            }
+        };
+
+    }
+}

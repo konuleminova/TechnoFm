@@ -1,5 +1,6 @@
 package app.android.technofm.oidarfm.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,10 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -43,12 +47,14 @@ public class InfoTab extends Fragment {
     String version, PACKAGE_NAME, mButtonText;
     Button send;
     AlertDialog alertDialog;
+    ScrollView scrollView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         try {
+            scrollView=(ScrollView) view.findViewById(R.id.scroll_view);
             getEmail = (EditText) view.findViewById(R.id.email_layout);
             getMessage = (EditText) view.findViewById(R.id.message_layout);
             holdEmail = getEmail.getText();
@@ -61,6 +67,15 @@ public class InfoTab extends Fragment {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                return false;
+            }
+        });
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
