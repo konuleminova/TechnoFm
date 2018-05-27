@@ -16,5 +16,5 @@
     <string name="addcontext" > ca-app-pub-8218969334616339~9665795511 </string>
     <string name="adddevice" >33BE2250B43518CCDA7DE426D04EE232 </string>
     <string name="api" >http://oidarfm.rufatet.com/app/sendmsg/ </string>
-    <string name="stream" >http://stream.radio.co/s3a6b8d4eb/listen </string>
+    <string name="stream" >http://85.132.71.10:8000/live </string>
 </resources>
